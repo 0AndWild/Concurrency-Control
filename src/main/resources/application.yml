@@ -1,0 +1,57 @@
+spring:
+  application:
+    name : concurrency-control
+
+  # H2 Database ??
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # JPA ??
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    show-sql: false
+
+  # Redis ?? (???, ????? ??????)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      connect-timeout: 2000ms
+
+  # H2 ?? ??? (???)
+  h2:
+    console:
+      enabled: true
+
+# ?? ??
+logging:
+  level:
+    com.example.concurrency: INFO
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+---
+# ??? ????
+spring:
+  config:
+    activate:
+      on-profile: test
+  jpa:
+    show-sql: false
+logging:
+  level:
+    org.springframework.transaction: INFO
+    org.springframework.orm.jpa: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
