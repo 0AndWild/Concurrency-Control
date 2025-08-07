@@ -38,10 +38,15 @@ dependencies {
     // Test Dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:redis'
+    testImplementation 'org.testcontainers:testcontainers' // 필수 Core
+    testImplementation 'com.redis.testcontainers:testcontainers-redis:1.6.4'
 
     // Logging
     implementation 'org.slf4j:slf4j-api'
+
+    // Lombok
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 }
 
 dependencyManagement {

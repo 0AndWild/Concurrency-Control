@@ -2,14 +2,12 @@ spring:
   application:
     name : concurrency-control
 
-  # H2 Database ??
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
     password:
 
-  # JPA ??
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -19,7 +17,6 @@ spring:
         format_sql: true
     show-sql: false
 
-  # Redis ?? (???, ????? ??????)
   data:
     redis:
       host: localhost
@@ -27,22 +24,19 @@ spring:
       timeout: 2000ms
       connect-timeout: 2000ms
 
-  # H2 ?? ??? (???)
   h2:
     console:
       enabled: true
 
-# ?? ??
 logging:
   level:
     com.example.concurrency: INFO
     org.springframework.transaction: DEBUG
     org.springframework.orm.jpa: DEBUG
-    org.hibernate.SQL: DEBUG
+#    org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 ---
-# ??? ????
 spring:
   config:
     activate:
@@ -53,5 +47,5 @@ logging:
   level:
     org.springframework.transaction: INFO
     org.springframework.orm.jpa: INFO
-    org.hibernate.SQL: INFO
+#    org.hibernate.SQL: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: INFO
