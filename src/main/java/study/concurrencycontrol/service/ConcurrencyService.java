@@ -1,5 +1,6 @@
 package study.concurrencycontrol.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,9 @@ import study.concurrencycontrol.entity.Counter;
 import study.concurrencycontrol.repository.CounterRepository;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
-
+@Slf4j
 @Service
 public class ConcurrencyService {
 
@@ -28,6 +30,8 @@ public class ConcurrencyService {
 
     // Java ReentrantLock 사용
     private final ReentrantLock javaLock = new ReentrantLock();
+
+    private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
     /**
      * 1. 동기화 없음 (Race Condition 발생)
@@ -147,6 +151,7 @@ public class ConcurrencyService {
         try {
             // 10초 동안 락 획득 시도, 최대 5초 동안 락 유지
             if (lock.tryLock(10, 5, TimeUnit.SECONDS)) {
+                log.info("-----------------Lock acquired count : {} ---------------------", COUNTER.incrementAndGet());
                 Counter counter = counterRepository.findByName(counterName)
                         .orElse(new Counter(counterName));
 

@@ -20,7 +20,7 @@ public class Counter {
     @Column(nullable = false)
     private Long count = 0L;
 
-    @Version
+//    @Version
     private Long version;
 
     public Counter() {}
